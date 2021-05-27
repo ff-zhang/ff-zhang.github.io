@@ -1,23 +1,24 @@
 <template>
-  <div class="navbar">
-    <b-sidebar no-header shadow>
-      <nav class="mb-3">
-        <b-nav vertical>
-          <b-nav-item active>Active</b-nav-item>
-          <b-nav-item>link</b-nav-item>
-        </b-nav>
-      </nav>
-    </b-sidebar>
-  </div>
+  <b-nav class="pt-3" vertical>
+    <b-nav-item href="#">Felix</b-nav-item>
+    <b-nav-item href="#">
+      <b-icon icon="journal-bookmark-fill"></b-icon>
+    </b-nav-item>
+    <b-nav-item href="#">
+      <b-icon icon="hammer"></b-icon>
+    </b-nav-item>
+    <b-nav-item href="#"> 
+      <b-icon icon="card-checklist"></b-icon>
+    </b-nav-item>
+  </b-nav>
 </template>
 
 <script>
-// import { defineComponent } from '@vue/composition-api'
-
 export default ({
   name: 'Navbar'
-  // setup() {
-    
-  // },
 })
 </script>
+
+<style scoped>
+
+</style>
