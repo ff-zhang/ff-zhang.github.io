@@ -32,7 +32,7 @@ export default {
         '&emsp;&emsp;💻 aspiring computer scientist,',
         '&emsp;&emsp;🩰 dancer extraordinaire,',
         '};',
-        'A copy of my resume is available <a href=#>here</a>;'
+        '<a href="#">email</a> <a href="#">github</a> <a href="#">instagram</a> <a href="#">resumé</a>'
       ]
     }
   },

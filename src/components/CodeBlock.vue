@@ -1,57 +1,61 @@
 <template>
-  <div class="code-line">
+  <div class="code-block">
     <b-table-simple small borderless>
       <b-tbody>
-        <b-tr>
-          <b-td class="line-numbers">
-            <p class="line-num" v-for="(line, i) in lines" :key="i">{{ i + 1 }}.</p>
-          </b-td>
-          <b-td>
-            <vue-typed-js :strings="[concatenate(lines)]">
-              <span class="typing"></span>
-            </vue-typed-js>
-          </b-td>
-        </b-tr>
+        <div id="terminal">
+          <CodeLine :lineNum="lineNum" :line="lines[lineNum - 1]" @onComplete="addRow()"/>
+          <div id="next-line"></div>
+        </div>
       </b-tbody>
     </b-table-simple>
   </div>
-  
 </template>
 
 <script>
+import Vue from 'vue'
+
+import CodeLine from './CodeLine.vue'
+
 export default {
   name: 'CodeBlock',
+  components: {
+    CodeLine,
+  },
   props: {
-    lines: Array
+    lines: Array,
+  },
+  data() {
+    return {
+      lineNum: 1,
+    }
   },
   methods: {
-    concatenate(strings) {
-      var output = ''
-      strings.forEach(str => {
-        output += '<p>' + str + '</p>'
-      });
+    addRow() {
+      this.lineNum += 1
+      
+      if (this.lineNum <= this.lines.length) {
+        console.log(this.lineNum, this.lineNum <= this.lines.length)
+        const CodeLineConst = Vue.extend(CodeLine)
+        var vm = new CodeLineConst({
+          propsData: {
+            lineNum: this.lineNum,
+            line: this.lines[this.lineNum - 1]
+          },
+        }).$mount('#next-line')
+        
+        vm.$on('onComplete', () => {
+          this.addRow()
+        })
 
-      return output
+        var nextLine = document.createElement('div')
+        nextLine.id = 'next-line'
+        document.getElementById('terminal').append(nextLine)
+      }
     }
-  }
+  },
 }
 </script>
 
-<style> 
-/* TODO: Find a way to style <p> in a scoped form */
-p {
-  color: white;
-}
+<style>
 
-a {
-  color: white;
-}
-
-.line-numbers {
-  width: 2em;
-}
-
-.line-num {
-  color: rgb(125, 116, 185);
-}
 </style>
