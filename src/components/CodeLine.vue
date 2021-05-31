@@ -1,11 +1,11 @@
 <template>
-  <div class="code-line">
+  <div class="code-line py-0">
     <b-td class="line-numbers">
-      <p class="line-num">{{ counter }}.</p>
+      <p class="line-num my-0">{{ counter }}.</p>
     </b-td>
     <b-td>
-      <vue-typed-js :strings="[line]" v-on:onComplete="$emit('onComplete')">
-        <p class="typing"></p>
+      <vue-typed-js :strings="[line]" @onComplete="$emit('onComplete')">
+        <p class="typing my-0"></p>
       </vue-typed-js>
     </b-td>
   </div>
@@ -34,6 +34,10 @@ p {
 
 a {
   color: white;
+}
+
+a:hover {
+  color: gainsboro;
 }
 
 .line-numbers {

@@ -34,7 +34,6 @@ export default {
       this.lineNum += 1
       
       if (this.lineNum <= this.lines.length) {
-        console.log(this.lineNum, this.lineNum <= this.lines.length)
         const CodeLineConst = Vue.extend(CodeLine)
         var vm = new CodeLineConst({
           propsData: {
