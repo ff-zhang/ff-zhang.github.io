@@ -35,16 +35,16 @@ export default {
       
       if (this.lineNum <= this.lines.length) {
         const CodeLineConst = Vue.extend(CodeLine)
-        var vm = new CodeLineConst({
+        new CodeLineConst({
           propsData: {
             lineNum: this.lineNum,
             line: this.lines[this.lineNum - 1]
           },
-        }).$mount('#next-line')
-        
-        vm.$on('onComplete', () => {
-          this.addRow()
-        })
+        }).$on(
+          'onComplete', () => { 
+            this.addRow() 
+          }
+        ).$mount('#next-line')
 
         var nextLine = document.createElement('div')
         nextLine.id = 'next-line'

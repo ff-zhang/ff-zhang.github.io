@@ -35,20 +35,23 @@ export default {
           '];'
         ],
         educationLines: [
-          'University of Toronto (St. George), Toronto',
-          '<i>2021 - current</i>',
+          'University of Toronto (Toronto, ON)',
+          '<i>Sept. 2021 - Now</i>',
           '',
-          'St. Michaels University School, Victoria',
-          '<i>2019 - 2021</i>',
+          'St. Michaels University School (Victoria, BC)',
+          '<i>Sept. 2019 - June 2021</i>',
           '',
-          'Esquimalt High School, Victoria',
-          '<i>2017 - 2019</i>'
+          'Esquimalt High School (Victoria, BC)',
+          '<i>Sept. 2017 - June 2019</i>'
         ],
         projectsLines: [
-          '',
+          'Video Producer (Westcoast Academy of Performing Arts)',
         ],
         goalsLines: [
-          '',
+          '<s>Graduate high school</s> (June 2021)',
+          'Live in Europe for at least two months',
+          'Attend a Liverpool FC match',
+          'Contribute to a open-source project I have used',
         ]
       }
     }

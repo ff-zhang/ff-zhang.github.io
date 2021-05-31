@@ -4,12 +4,15 @@
       <b-col class="bg-light p-0" sm="auto" align="left" cols="2">
         <Navbar @click="setPage"/>
       </b-col>
-      <b-col class="p-0">
-        <b-container class="bg-dark min-vh-100 pt-3" fluid>
+      <b-col class="bg-dark p-0">
+        <b-container class="min-vh-100 pt-3" fluid>
           <Terminal :page="page"/>
         </b-container>
       </b-col>
     </b-row>
+    <!-- <footer>
+      <p>By Felix Zhang</p>
+    </footer> -->
   </div>
 </template>
 

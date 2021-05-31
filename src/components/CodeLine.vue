@@ -1,10 +1,10 @@
 <template>
   <div class="code-line py-0">
     <b-td class="line-numbers">
-      <p class="line-num my-0">{{ counter }}.</p>
+      <p class="line-num my-0">{{ num }}.</p>
     </b-td>
     <b-td>
-      <vue-typed-js :strings="[line]" @onComplete="$emit('onComplete')">
+      <vue-typed-js :strings="[line]" :typeSpeed=1 @onComplete="$emit('onComplete')">
         <p class="typing my-0"></p>
       </vue-typed-js>
     </b-td>
@@ -20,7 +20,7 @@ export default {
   },
   data() {
     return {
-      counter: this.lineNum
+      num: this.lineNum
     }
   }
 }
