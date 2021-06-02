@@ -1,27 +1,45 @@
 <template>
-  <div class="sidenav">
-    <b-nav class="pt-3" justified vertical>
+  <div class="sidenav h-100">
+    <b-nav class="pt-2 h-100" vertical>
       <b-nav-item class="mx-auto" @click="$emit('click', 'home')">Felix</b-nav-item>
-      <b-nav-item v-for="link in links" :key=link[0] class="mx-auto" @click="$emit('click', link[0])">
-        <b-icon :icon=link[1] font-scale="1.5"></b-icon>
+      <b-nav-item v-for="link in links" :key="link['target']" class="mx-auto" @click="$emit('click', link['icon'])">
+        <b-icon :icon="link['icon']" font-scale="1.5"></b-icon>
       </b-nav-item>
       <!-- TODO: put settings icon at the bottom of the page -->
-      <b-nav-item class="mx-auto mt-5" @click="toggleOverlay">
+      <b-nav-item class="mx-auto mt-auto" @click="toggleOverlay">
         <b-icon icon="gear" font-scale="1.5"></b-icon>
       </b-nav-item>
+
+      <b-overlay :show="show" no-wrap>
+        <template #overlay>
+          <b-card>
+            <b-form-group label="Colour Scheme:" label-for="select-colour-scheme">
+              <b-form-select
+                id="select-colour-scheme"
+                v-model="settings.selectedColourScheme" 
+                :options="settings.colourScheme"
+              ></b-form-select>
+            </b-form-group>
+
+            <b-form-group label="Typing Speed:" label-for="set-typing-speed">
+              <b-form-radio-group
+                id="set-typing-speed"
+                v-model="settings.selectedTypingSpeed" 
+                :options="settings.typingSpeed"
+              ></b-form-radio-group>
+            </b-form-group>
+
+            <b-button variant="outline-primary" size="sm" @click="toggleOverlay">Done</b-button>
+          </b-card>
+        </template>
+      </b-overlay>
     </b-nav>
-    <b-overlay :show=show no-wrap>
-      <template #overlay>
-        <!-- TODO: add form for changing settings -->
-        <b-button ref="done" variant="outline-primary" size="sm" @click="toggleOverlay">
-          Done
-        </b-button>
-      </template>
-    </b-overlay>
   </div>
 </template>
 
 <script>
+import { store } from './../store.js'
+
 export default {
   name: 'Navbar',
   methods: {
@@ -32,11 +50,12 @@ export default {
   data() {
     return {
       links: [
-        ['education', 'journal-bookmark-fill'],
-        ['projects', 'hammer'],
-        ['goals', 'card-checklist'],
+        { target: 'education', icon: 'journal-bookmark-fill' },
+        { target: 'projects', icon: 'hammer' },
+        { target: 'goals', icon: 'card-checklist' },
       ],
-      show: false
+      show: false,
+      settings: store.settings,
     }
   }
 }
