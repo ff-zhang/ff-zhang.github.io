@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <b-row class="ml-0" no-gutters>
-      <b-col class="bg-light p-0" sm="auto" align="left" cols="2">
-        <Navbar @click="setPage"/>
+    <b-row class="m-0" no-gutters>
+      <b-col class="bg-light p-0" sm="auto" cols="2">
+        <Navbar/>
       </b-col>
       <b-col class="bg-dark p-0">
         <b-container class="min-vh-100 pt-3" fluid>
