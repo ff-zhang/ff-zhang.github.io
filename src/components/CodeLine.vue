@@ -1,10 +1,10 @@
 <template>
-  <div class="code-line py-0">
+  <div v-if="show" class="code-line py-0">
     <b-td class="line-numbers">
       <p class="line-num my-0">{{ num }}.</p>
     </b-td>
     <b-td>
-      <vue-typed-js :strings="[line]" :typeSpeed=1 @onComplete="$emit('onComplete')">
+      <vue-typed-js :strings="[line]" :typeSpeed=typingSpeed @onComplete="$emit('onComplete')">
         <p class="typing my-0"></p>
       </vue-typed-js>
     </b-td>
@@ -12,15 +12,42 @@
 </template>
 
 <script>
+import { store } from './../store.js'
+
 export default {
   name: 'CodeLine',
   props: {
     lineNum: Number,
     line: String
   },
+  beforeMount() {
+    if (this.line != this.lines[this.num - 1]) {
+      this.show = false
+    }
+  },
+  computed: {
+    typingSpeed() {
+      switch(this.settings.selectedTypingSpeed) {
+        case 'Slow':
+          return 100
+
+        case 'Normal':
+          return 50
+
+        case 'Fast':
+          return 1
+        
+        default:
+          return 50
+      }
+    }
+  },
   data() {
     return {
-      num: this.lineNum
+      num: this.lineNum,
+      lines: store.lines[store.page.currentPage],
+      show: true,
+      settings: store.settings
     }
   }
 }
