@@ -1,8 +1,9 @@
 <template>
-  <CodeBlock :lines="currentLines" :key="page"/>
+  <CodeBlock :lines="currentLines" :key="page.currentPage"/>
 </template>
 
 <script>
+import { store } from './../store.js'
 import CodeBlock from './CodeBlock.vue'
 
 export default {
@@ -10,16 +11,14 @@ export default {
   components: {
     CodeBlock,
   },
-  props: {
-    page: String
-  },
   computed: {
     currentLines: function() {
-      return this.lines[this.page + 'Lines']
+      return this.lines[this.page.currentPage + 'Lines']
     }
   },
   data() {
     return {
+      page: store.page,
       lines: {
         homeLines: [
           'Hi, my name is Felix Zhang;',
@@ -59,6 +58,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="sidenav h-100">
     <b-nav class="pt-2 h-100" vertical>
-      <b-nav-item class="mx-auto" @click="$emit('click', 'home')">Felix</b-nav-item>
-      <b-nav-item v-for="link in links" :key="link['target']" class="mx-auto" @click="$emit('click', link['icon'])">
+      <b-nav-item class="mx-auto" @click="page.currentPage = 'home'">Felix</b-nav-item>
+      <b-nav-item v-for="link in links" :key="link['target']" class="mx-auto" @click="page.currentPage = link['target']">
         <b-icon :icon="link['icon']" font-scale="1.5"></b-icon>
       </b-nav-item>
       <!-- TODO: put settings icon at the bottom of the page -->
@@ -45,10 +45,11 @@ export default {
   methods: {
     toggleOverlay() {
       this.show = !this.show
-    }
+    },
   },
   data() {
     return {
+      page: store.page,
       links: [
         { target: 'education', icon: 'journal-bookmark-fill' },
         { target: 'projects', icon: 'hammer' },

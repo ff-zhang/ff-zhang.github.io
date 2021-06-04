@@ -6,7 +6,7 @@
       </b-col>
       <b-col class="bg-dark p-0">
         <b-container class="min-vh-100 pt-3" fluid>
-          <Terminal :page="page"/>
+          <Terminal/>
         </b-container>
       </b-col>
     </b-row>
@@ -26,16 +26,6 @@ export default {
     Navbar,
     Terminal,
   },
-  methods: {
-    setPage(msg) {
-      this.page = msg
-    }
-  },
-  data() {
-    return {
-      page: 'home'
-    }
-  }
 }
 </script>
 
