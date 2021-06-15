@@ -1,47 +1,35 @@
 <template>
   <div id="app">
     <b-row class="m-0" no-gutters>
-      <b-col class="bg-light p-0" sm="auto" cols="2">
+      <b-col class="p-0" sm="auto" cols="2">
         <Navbar/>
       </b-col>
       <b-col class="p-0">
-        <b-container class="bg-dark min-vh-100 pt-3" fluid>
-          <CodeBlock :lines="lines"/>
-        </b-container>
+        <Terminal/>
       </b-col>
     </b-row>
+    <!-- <footer>
+      <p>By Felix Zhang</p>
+    </footer> -->
   </div>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue'
-import CodeBlock from './components/CodeBlock.vue'
+import Terminal from './components/Terminal.vue'
 
 export default {
   name: 'App',
   components: {
     Navbar,
-    CodeBlock,
-  },
-  data() {
-    return {
-      lines: [
-        'Hi, my name is Felix Zhang;',
-        'I\'m a(n) {',
-        '&emsp;&emsp;🍁 university student,',
-        '&emsp;&emsp;💻 aspiring computer scientist,',
-        '&emsp;&emsp;🩰 dancer extraordinaire,',
-        '};',
-        'A copy of my resume is available <a href=#>here</a>;'
-      ]
-    }
-  },
+    Terminal,
+  }
 }
 </script>
 
 <style>
 #app {
-  font-family: Consolas, Courier New, monospace;
+  font-family: "Consolas", "Courier New", monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
