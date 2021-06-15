@@ -13,13 +13,13 @@
       <b-overlay :show="show" no-wrap>
         <template #overlay>
           <b-card>
-            <b-form-group label="Colour Scheme:" label-for="select-colour-scheme">
+            <!-- <b-form-group label="Colour Scheme:" label-for="select-colour-scheme">
               <b-form-select
                 id="select-colour-scheme"
                 v-model="settings.selectedColourScheme" 
                 :options="settings.colourScheme"
               ></b-form-select>
-            </b-form-group>
+            </b-form-group> -->
 
             <b-form-group label="Typing Speed:" label-for="set-typing-speed">
               <b-form-radio-group
