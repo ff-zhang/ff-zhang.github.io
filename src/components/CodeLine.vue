@@ -1,7 +1,7 @@
 <template>
   <div v-if="show" class="code-line py-0">
     <b-td class="line-numbers">
-      <p class="line-num my-0">{{ num }}.</p>
+      <p class="my-0" :style="style">{{ num }}.</p>
     </b-td>
     <b-td>
       <vue-typed-js :strings="[line]" :typeSpeed=typingSpeed @onComplete="$emit('onComplete')">
@@ -47,7 +47,10 @@ export default {
       num: this.lineNum,
       lines: store.lines[store.page.currentPage],
       show: true,
-      settings: store.settings
+      settings: store.settings,
+      style: {
+        color: '#3a3f58'
+      }
     }
   }
 }
@@ -56,11 +59,11 @@ export default {
 <style>
 /* TODO: Find a way to style <p> in a scoped form */
 p {
-  color: white;
+  color: #A6ACCD;
 }
 
 a {
-  color: white;
+  color: #A6ACCD;
 }
 
 a:hover {
@@ -69,9 +72,5 @@ a:hover {
 
 .line-numbers {
   width: 2em;
-}
-
-.line-num {
-  color: rgb(125, 116, 185);
 }
 </style>

@@ -1,5 +1,7 @@
 <template>
-  <CodeBlock :lines="currentLines" :key="page.currentPage"/>
+  <b-container class="min-vh-100 pt-3" :style="style" fluid>
+    <CodeBlock :lines="currentLines" :key="page.currentPage"/>
+  </b-container>
 </template>
 
 <script>
@@ -19,7 +21,10 @@ export default {
   data() {
     return {
       page: store.page,
-      lines: store.lines
+      lines: store.lines,
+      style: {
+        backgroundColor: '#292d3e'
+      }
     }
   }
 }
