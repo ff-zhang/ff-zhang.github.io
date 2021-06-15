@@ -30,7 +30,7 @@ export const store = Vue.observable({
       '];',
       '',
       'You can find more about me at [',
-      '&emsp;&emsp;<a href="mailto:felixfzhang@hotmail.com">email</a>, <a href="https://github.com/Hogwarts250" target="_blank" rel="noopener noreferrer">github</a>, <a href="https://www.instagram.com/ff.zhang/" target="_blank" rel="noopener noreferrer">instagram</a>, <a href="#">resumé</a>',
+      '&emsp;&emsp;<a href="mailto:felixfzhang@hotmail.com">email</a>, <a href="https://github.com/ff-zhang" target="_blank" rel="noopener noreferrer">github</a>, <a href="https://www.instagram.com/ff.zhang/" target="_blank" rel="noopener noreferrer">instagram</a>',
       '];'
     ],
     education: [
