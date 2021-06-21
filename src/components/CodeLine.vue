@@ -1,12 +1,13 @@
 <template>
   <div v-if="show" class="code-line py-0">
     <b-td class="line-numbers">
-      <p class="my-0" :style="style">{{ num }}.</p>
+      <p class="my-0" :style="numStyle">{{ num }}.</p>
     </b-td>
     <b-td>
-      <vue-typed-js :strings="[line]" :typeSpeed=typingSpeed @onComplete="$emit('onComplete')">
-        <p class="typing my-0"></p>
+      <vue-typed-js v-if="!typed && selectedTypingSpeed !== 'Instant'" :strings="[line]" :typeSpeed=typingSpeed @onComplete="destroy()">
+        <p class="typing my-0" :style="lineStyle"></p>
       </vue-typed-js>
+      <p v-else v-html="line" class="my-0" :style="lineStyle"></p>
     </b-td>
   </div>
 </template>
@@ -18,7 +19,7 @@ export default {
   name: 'CodeLine',
   props: {
     lineNum: Number,
-    line: String
+    text: String
   },
   beforeMount() {
     if (this.line != this.lines[this.num - 1]) {
@@ -27,7 +28,7 @@ export default {
   },
   computed: {
     typingSpeed() {
-      switch(this.settings.selectedTypingSpeed) {
+      switch(this.selectedTypingSpeed) {
         case 'Slow':
           return 100
 
@@ -36,40 +37,39 @@ export default {
 
         case 'Fast':
           return 1
-        
+
         default:
           return 50
       }
-    }
+    },
   },
   data() {
     return {
       num: this.lineNum,
+      line: this.text,
       lines: store.lines[store.page.currentPage],
       show: true,
-      settings: store.settings,
-      style: {
+      typed: false,
+      selectedTypingSpeed: store.settings.selectedTypingSpeed,
+      numStyle: {
         color: '#3a3f58'
-      }
+      },
+      lineStyle: {
+        color: '#a6accd'
+      } 
     }
+  },
+  methods: {
+      destroy() {
+        this.typed = true
+
+        this.$emit('onComplete')
+      }
   }
 }
 </script>
 
-<style>
-/* TODO: Find a way to style <p> in a scoped form */
-p {
-  color: #A6ACCD;
-}
-
-a {
-  color: #A6ACCD;
-}
-
-a:hover {
-  color: gainsboro;
-}
-
+<style scoped>
 .line-numbers {
   width: 2em;
 }

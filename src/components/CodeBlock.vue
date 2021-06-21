@@ -3,8 +3,13 @@
     <b-table-simple small borderless>
       <b-tbody>
         <div id="terminal">
-          <CodeLine :lineNum="lineNum" :line="lines[lineNum - 1]" @onComplete="addRow()"/>
-          <div id="next-line"></div>
+          <div v-if="settings.selectedTypingSpeed !== 'Instant'">
+            <CodeLine :lineNum="lineNum" :text="lines[lineNum - 1]" @onComplete="addRow()"/>
+            <span id="next-line"></span>
+          </div>
+          <div v-else>
+            <CodeLine v-for="(line, i) in lines" :lineNum="i+1" :text="line" :key="i"/>
+          </div>
         </div>
       </b-tbody>
     </b-table-simple>
@@ -15,6 +20,7 @@
 import Vue from 'vue'
 
 import CodeLine from './CodeLine.vue'
+import { store } from '../store.js'
 
 export default {
   name: 'CodeBlock',
@@ -27,7 +33,8 @@ export default {
   data() {
     return {
       lineNum: 1,
-    }
+      settings: store.settings,
+      }
   },
   methods: {
     addRow() {
@@ -38,7 +45,7 @@ export default {
         new CodeLineConst({
           propsData: {
             lineNum: this.lineNum,
-            line: this.lines[this.lineNum - 1]
+            text: this.lines[this.lineNum - 1]
           },
         }).$on(
           'onComplete', () => { 
@@ -46,7 +53,7 @@ export default {
           }
         ).$mount('#next-line')
 
-        var nextLine = document.createElement('div')
+        var nextLine = document.createElement('span')
         nextLine.id = 'next-line'
         document.getElementById('terminal').append(nextLine)
       }

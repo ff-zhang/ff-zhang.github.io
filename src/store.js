@@ -16,7 +16,7 @@ export const store = Vue.observable({
       'Slow',
       'Normal',
       'Fast',
-      // 'Instant',
+      'Instant',
     ]
   },
   lines: {
