@@ -1,11 +1,11 @@
 <template>
-  <div v-if="show" class="code-line py-0">
+  <div class="code-line py-0">
     <b-td class="line-numbers">
       <p class="my-0" :style="numStyle">{{ num }}.</p>
     </b-td>
     <b-td>
       <vue-typed-js v-if="!typed && selectedTypingSpeed !== 'Instant'" :strings="[line]" :typeSpeed=typingSpeed @onComplete="destroy()">
-        <p class="typing my-0" :style="lineStyle"></p>
+        <p class="typing my-0" :style="lineStyle"></p>  
       </vue-typed-js>
       <p v-else v-html="line" class="my-0" :style="lineStyle"></p>
     </b-td>
@@ -19,12 +19,13 @@ export default {
   name: 'CodeLine',
   props: {
     lineNum: Number,
-    text: String
+    text: String,
   },
-  beforeMount() {
-    if (this.line != this.lines[this.num - 1]) {
-      this.show = false
-    }
+  methods: {
+      destroy() {
+        this.typed = true
+        this.$emit('onComplete')
+      }
   },
   computed: {
     typingSpeed() {
@@ -47,25 +48,16 @@ export default {
     return {
       num: this.lineNum,
       line: this.text,
-      lines: store.lines[store.page.currentPage],
-      show: true,
       typed: false,
       selectedTypingSpeed: store.settings.selectedTypingSpeed,
       numStyle: {
-        color: '#3a3f58'
+        color: store.themes[store.settings.selectedColourScheme].lineNum
       },
       lineStyle: {
-        color: '#a6accd'
-      } 
+        color: store.themes[store.settings.selectedColourScheme].text
+      }
     }
   },
-  methods: {
-      destroy() {
-        this.typed = true
-
-        this.$emit('onComplete')
-      }
-  }
 }
 </script>
 

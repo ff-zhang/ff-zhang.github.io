@@ -1,6 +1,6 @@
 <template>
   <b-container class="min-vh-100 pt-3" :style="style" fluid>
-    <CodeBlock :lines="currentLines" :key="page.currentPage"/>
+    <CodeBlock :key="currentPage"/>
   </b-container>
 </template>
 
@@ -14,14 +14,10 @@ export default {
     CodeBlock,
   },
   computed: {
-    currentLines() {
-      return this.lines[this.page.currentPage]
-    }
+    currentPage() { return store.settings.currentPage }
   },
   data() {
     return {
-      page: store.page,
-      lines: store.lines,
       style: {
         backgroundColor: '#292d3e'
       }
