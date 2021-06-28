@@ -14,15 +14,13 @@ export default {
     CodeBlock,
   },
   computed: {
-    currentPage() { return store.settings.currentPage }
-  },
-  data() {
-    return {
-      style: {
-        backgroundColor: '#292d3e'
+    currentPage() { return store.settings.currentPage },
+    style() {
+      return {
+        backgroundColor: store.themes[store.settings.selectedColourScheme].terminalBackground 
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

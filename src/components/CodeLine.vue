@@ -43,6 +43,16 @@ export default {
           return 50
       }
     },
+    numStyle() {
+      return {
+        color: store.themes[store.settings.selectedColourScheme].lineNum 
+      }
+    },
+    lineStyle() {
+      return {
+        color: store.themes[store.settings.selectedColourScheme].text 
+      }
+    },
   },
   data() {
     return {
@@ -50,12 +60,6 @@ export default {
       line: this.text,
       typed: false,
       selectedTypingSpeed: store.settings.selectedTypingSpeed,
-      numStyle: {
-        color: store.themes[store.settings.selectedColourScheme].lineNum
-      },
-      lineStyle: {
-        color: store.themes[store.settings.selectedColourScheme].text
-      }
     }
   },
 }
