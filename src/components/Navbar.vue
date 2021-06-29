@@ -1,30 +1,32 @@
 <template>
-  <div class="sidenav h-100" :style="style">
+  <div class="h-100" :style="navStyle">
     <b-nav class="pt-2 h-100" vertical>
-      <b-nav-item class="mx-auto" @click="page.currentPage = 'home'"><span :style=iconStyle>Felix</span></b-nav-item>
-      <b-nav-item v-for="link in links" :key="link['target']" class="mx-auto" @click="page.currentPage = link['target']">
-        <b-icon :icon="link['icon']" font-scale="1.5" :style=iconStyle></b-icon>
+      <b-nav-item class="mx-auto" @click="settings.currentPage = 'home'">
+        <span :style=iconStyle :active="settings.currentPage === 'home'" active-class="active">Felix</span>
+      </b-nav-item>
+      <b-nav-item v-for="link in links" class="mx-auto" :key="link['target']" @click="settings.currentPage = link['target']">
+        <b-icon :icon="link['icon']" :active="settings.currentPage === link['target']" active-class="active" :style=iconStyle font-scale="1.5" ></b-icon>
       </b-nav-item>
       <b-nav-item class="mx-auto mt-auto" @click="toggleOverlay">
         <b-icon icon="gear" font-scale="1.5" :style=iconStyle></b-icon>
       </b-nav-item>
 
-      <b-overlay :show="show" no-wrap>
+      <b-overlay :show="showOverlay" no-wrap>
         <template #overlay>
           <b-card class="p-3">
-            <!-- <b-form-group label="Colour Scheme:" label-for="select-colour-scheme">
+            <b-form-group label="Colour Scheme:" label-for="select-colour-scheme">
               <b-form-select
                 id="select-colour-scheme"
                 v-model="settings.selectedColourScheme" 
-                :options="settings.colourScheme"
+                :options="colourSchemes"
               ></b-form-select>
-            </b-form-group> -->
+            </b-form-group>
 
             <b-form-group label="Typing Speed:" label-for="set-typing-speed">
               <b-form-radio-group
                 id="set-typing-speed"
                 v-model="settings.selectedTypingSpeed" 
-                :options="settings.typingSpeed"
+                :options="typingSpeeds"
               ></b-form-radio-group>
             </b-form-group>
 
@@ -43,31 +45,49 @@ export default {
   name: 'Navbar',
   methods: {
     toggleOverlay() {
-      this.show = !this.show
+      this.showOverlay = !this.showOverlay
+    },
+  },
+  computed: {
+    navStyle() {
+      return {
+        backgroundColor: store.themes[store.settings.selectedColourScheme].navBackground 
+      }
+    },
+    iconStyle() {
+      return {
+        color: store.themes[store.settings.selectedColourScheme].icon
+      }
     },
   },
   data() {
     return {
-      page: store.page,
+      settings: store.settings,
+      showOverlay: false, 
       links: [
         { target: 'education', icon: 'journal-bookmark-fill' },
         { target: 'projects', icon: 'hammer' },
         { target: 'goals', icon: 'card-checklist' },
       ],
-      show: false,
-      settings: store.settings,
-      style: {
-        backgroundColor: '#1b1e2b',
-        bNavItem: '#a6accd',
-      },
-      iconStyle: {
-        color: "#717cb4" // 717cb450
-      }
+      colourSchemes: [
+        { value: 'lighter', text: 'Material Theme Lighter' },
+        { value: 'darker', text: 'Material Theme Darker' },
+        { value: 'palenight', text: 'Material Theme Palenight' },
+        { value: 'ocean', text: 'Material Theme Ocean' },
+      ],
+      typingSpeeds: [
+        'Slow',
+        'Normal',
+        'Fast',
+        'Instant',
+      ],
     }
   }
 }
 </script>
 
 <style scoped>
-
+.active {
+  color: #ffffff
+}
 </style>
