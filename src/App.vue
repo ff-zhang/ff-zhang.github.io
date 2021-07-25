@@ -5,7 +5,7 @@
         <Navbar/>
       </b-col>
       <b-col class="p-0">
-        <Terminal/>
+        <router-view></router-view>
       </b-col>
     </b-row>
     <!-- <footer>
@@ -16,13 +16,11 @@
 
 <script>
 import Navbar from './components/Navbar.vue'
-import Terminal from './components/Terminal.vue'
 
 export default {
   name: 'App',
   components: {
     Navbar,
-    Terminal,
   }
 }
 </script>

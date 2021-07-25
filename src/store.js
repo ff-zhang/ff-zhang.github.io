@@ -4,7 +4,6 @@ export const store = Vue.observable({
   settings: {
     selectedColourScheme: 'ocean',
     selectedTypingSpeed: 'Fast',
-    currentPage: 'home',
   },
   themes: {
     'lighter': {
