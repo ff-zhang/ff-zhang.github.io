@@ -23,7 +23,9 @@ export default {
         '',
         'You can find more about me at [',
         '&emsp;&emsp;<a href="mailto:felixfzhang@hotmail.com">email</a>, <a href="https://github.com/ff-zhang" target="_blank" rel="noopener noreferrer">github</a>, <a href="https://www.instagram.com/ff.zhang/" target="_blank" rel="noopener noreferrer">instagram</a>',
-        '];'
+        '];',
+        '',
+        '(Change the colour theme and typing speed down below)',
       ],
     }
   }

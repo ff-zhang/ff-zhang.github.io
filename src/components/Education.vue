@@ -13,18 +13,19 @@ export default {
   data() {
     return {
       lines: [
-        'University of Toronto (Toronto, ON)',
-        '<i>Sept. 2021 - Present</i>',
+        'University of Toronto | Sept. 2021 - Present',
+        '<i>H.B.Sc. in Computer Science',
+        '<ul class="mb-0"><li>designated a University of Toronto Scholar</li></ul>',
         '',
-        'St. Michaels University School (Victoria, BC)',
-        '<i>Sept. 2019 - June 2021</i>',
-        'For the final two years in high school, I attended SMUS.',
+        'St. Michaels University School | Sept. 2019 - June 2021',
+        '<i>Dogwood Diploma; 97% GPA</i>',
+        '<ul class="mb-0"><li>received the Alumni Association Award for the highest average grade in three science courses</li></ul>',
+        '<ul class="mb-0"><li>co-head of Math Club + Astronomy Club</li></ul>',
+        '<ul class="mb-0"><li>awarded distinction or outstanding contribution in every class taken</li></ul>',
         '',
-        'Esquimalt High School (Victoria, BC)',
-        '<i>Sept. 2017 - June 2019</i>',
-        'In grades 9 and 10, I was a student at Esquimalt High, where I was a member of both their 4C Challenge and French Immersion programs.',
-        'Throughout my time there I was an active member of their fine arts community, playing in numerous bands and co-directing their production of Urinetown in grade 10.',
-        'Furthermore, I was able to excel academically, receiving an award for academic excellence in 13 classes in grade 10 and placing first in both the Pascal and Cayley math contests among the school.'
+        'Esquimalt High School | Sept. 2017 - June 2019',
+        '<ul class="mb-0"><li>received an award for academic excellence in 13 classes</li></ul>',
+        '<ul class="mb-0"><li>co-director of lighting for the production of "Urinetown"</li></ul>',
       ],
     }
   }
