@@ -1,5 +1,5 @@
 <template>
-  <b-container class="min-vh-100 pt-3" :style="style" fluid>
+  <b-container class="terminal min-vh-100 pt-3" :style="style" fluid>
     <div class="terminal">
       <b-table-simple small borderless>
         <b-tbody>
@@ -57,6 +57,7 @@ export default {
 
         var nextLine = document.createElement('span')
         nextLine.id = 'next-line'
+        // nextLine.className = 'text'
         document.getElementById('code-block').append(nextLine)
       }
     }
@@ -65,7 +66,8 @@ export default {
     selectedTypingSpeed() { return store.settings.selectedTypingSpeed },
     style() {
       return {
-        backgroundColor: store.themes[store.settings.selectedColourScheme].terminalBackground 
+        '--background-color': store.themes[store.settings.selectedColourScheme].terminalBackground,
+        '--text-color': store.themes[store.settings.selectedColourScheme].text,
       }
     },
   },
@@ -73,5 +75,11 @@ export default {
 </script>
 
 <style scoped>
+.terminal {
+  background-color: var(--background-color);
+}
 
+.text {
+  color: var(--text-color);
+}
 </style>

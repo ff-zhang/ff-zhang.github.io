@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-row class="m-0" no-gutters>
-      <b-col class="p-0" sm="auto" cols="2">
+      <b-col class="p-0" cols="auto">
         <Navbar/>
       </b-col>
       <b-col class="p-0">

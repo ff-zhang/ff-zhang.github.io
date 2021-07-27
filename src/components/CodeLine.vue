@@ -1,13 +1,13 @@
 <template>
-  <div class="code-line py-0">
+  <div class="code-line py-0" :style="style">
     <b-td class="line-numbers">
-      <p class="my-0" :style="numStyle">{{ num }}.</p>
+      <p class="my-0">{{ num }}.</p>
     </b-td>
-    <b-td>
+    <b-td class="text">
       <vue-typed-js v-if="!typed && selectedTypingSpeed !== 'Instant'" :strings="[line]" :typeSpeed=typingSpeed @onComplete="destroy()">
-        <p class="typing my-0" :style="lineStyle"></p>  
+        <p class="typing my-0"></p>  
       </vue-typed-js>
-      <p v-else v-html="line" class="my-0" :style="lineStyle"></p>
+      <p v-else v-html="line" class="my-0"></p>
     </b-td>
   </div>
 </template>
@@ -43,14 +43,10 @@ export default {
           return 50
       }
     },
-    numStyle() {
+    style() {
       return {
-        color: store.themes[store.settings.selectedColourScheme].lineNum 
-      }
-    },
-    lineStyle() {
-      return {
-        color: store.themes[store.settings.selectedColourScheme].text 
+        '--num-color': store.themes[store.settings.selectedColourScheme].lineNum,
+        '--text-color': store.themes[store.settings.selectedColourScheme].text,
       }
     },
   },
@@ -68,5 +64,10 @@ export default {
 <style scoped>
 .line-numbers {
   width: 2em;
+  color: var(--num-color);
+}
+
+.text {
+  color: var(--text-color);
 }
 </style>

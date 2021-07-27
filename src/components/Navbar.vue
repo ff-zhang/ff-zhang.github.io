@@ -1,16 +1,14 @@
 <template>
-  <div class="h-100 nav" :style="navStyle">
+  <div class="nav h-100" :style="style">
     <b-nav class="pt-2 h-100" vertical>
-      <b-nav-item to="/" class="mx-auto nav-icon" active-class="active">
-        Felix
-      </b-nav-item>
-      
-      <b-link v-for="(route, i) in links" :key="i" :to="route.target" class="mx-auto nav-icon" active-class="active">
+      <b-link to="/" class="nav-icon mx-auto my-1" active-class="active" style="text-decoration: none;" exact>
+        <h4 class="mb-0"><b>FZ</b></h4>
+      </b-link>
+      <b-link v-for="(route, i) in links" :key="i" :to="route.target" class="nav-icon mx-auto my-1" active-class="active">
         <b-icon :icon="route['icon']" font-scale="1.5" ></b-icon>
       </b-link>
-
       <b-nav-item class="mx-auto mt-auto" @click="toggleOverlay">
-        <b-icon icon="gear" font-scale="1.5"></b-icon>
+        <b-icon class="nav-icon active" icon="gear" font-scale="1.5"></b-icon>
       </b-nav-item>
 
       <b-overlay :show="showOverlay" no-wrap>
@@ -51,10 +49,11 @@ export default {
     },
   },
   computed: {
-    navStyle() {
+    style() {
       return {
         '--background-color': store.themes[store.settings.selectedColourScheme].navBackground,
-        '--icon-color': store.themes[store.settings.selectedColourScheme].icon
+        '--icon-color': store.themes[store.settings.selectedColourScheme].icon,
+        '--active-icon': store.themes[store.settings.selectedColourScheme].activeIcon,
       }
     },
   },
@@ -94,6 +93,6 @@ export default {
 }
 
 .active {
-  color: #ffffff;
+  color: var(--active-icon);
 }
 </style>
