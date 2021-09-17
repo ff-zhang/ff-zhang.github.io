@@ -13,11 +13,15 @@ export default {
   data() {
     return {
       lines: [
-        'Video Producer (Westcoast Academy of Performing Arts)',
+        '<h5 class="mb-0"><strong>Work / Volunteer Experience </strong></h5>',
+        '<strong>Video Producer</strong> | Westcoast Academy of Performing Arts',
         '',
-        'Personal Resumé Website',
+        '<strong>Website</strong> | Business Leadership Club @ <abbr title="St. Michaels University School">SMUS</abbr>',
         '',
-        'Website for Business Leadership Club (SMUS)'
+        '',
+        '<h5 class="mb-0"><strong>Projects</strong></h5>',
+        'Resumé Website',
+        '',
       ],
     }
   }

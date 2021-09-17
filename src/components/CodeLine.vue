@@ -47,6 +47,9 @@ export default {
       return {
         '--num-color': store.themes[store.settings.selectedColourScheme].lineNum,
         '--text-color': store.themes[store.settings.selectedColourScheme].text,
+        '--string-color': store.themes[store.settings.selectedColourScheme].string,
+        '--comment-color': store.themes[store.settings.selectedColourScheme].comment,
+        '--punctuation-color': store.themes[store.settings.selectedColourScheme].punctuation, 
       }
     },
   },
@@ -61,7 +64,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+a {
+  color: var(--text-color);
+}
+
+a:hover {
+  color: var(--text-color);
+}
+
 .line-numbers {
   width: 2em;
   color: var(--num-color);
@@ -69,5 +80,17 @@ export default {
 
 .text {
   color: var(--text-color);
+}
+
+.str { 
+  color: var(--string-color);
+}
+
+.comment {
+  color: var(--comment-color);
+}
+
+.punc {
+  color: var(--punctuation-color);
 }
 </style>
