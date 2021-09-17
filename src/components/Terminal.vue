@@ -3,14 +3,12 @@
     <div class="terminal">
       <b-table-simple small borderless>
         <b-tbody>
-          <div id="code-block">
-            <div v-if="selectedTypingSpeed !== 'Instant'">
-              <CodeLine :lineNum="lineNum" :text="lines[lineNum - 1]" @onComplete="addRow()"/>
-              <span id="next-line"></span>
-            </div>
-            <div v-else>
-              <CodeLine v-for="(line, i) in lines" :lineNum="i+1" :text="line" :key="i"/>
-            </div>
+          <div id="code-block" v-if="selectedTypingSpeed !== 'Instant'">
+            <CodeLine :lineNum="lineNum" :text="lines[lineNum - 1]" @onComplete="addRow()"/>
+            <span id="next-line"></span>
+          </div>
+          <div v-else>
+            <CodeLine v-for="(line, i) in lines" :lineNum="i+1" :text="line" :key="i"/>
           </div>
         </b-tbody>
       </b-table-simple>
@@ -42,7 +40,7 @@ export default {
     addRow() {
       this.lineNum += 1
       
-      if (this.lineNum <= this.lines.length && this.currentPage === this.$route.path) {
+      if (this.lineNum <= this.lines.length && this.currentPage === this.$route.path && this.selectedTypingSpeed != 'Instant') {
         const CodeLineConst = Vue.extend(CodeLine)
         new CodeLineConst({
           propsData: {
@@ -57,7 +55,6 @@ export default {
 
         var nextLine = document.createElement('span')
         nextLine.id = 'next-line'
-        // nextLine.className = 'text'
         document.getElementById('code-block').append(nextLine)
       }
     }
@@ -77,9 +74,5 @@ export default {
 <style scoped>
 .terminal {
   background-color: var(--background-color);
-}
-
-.text {
-  color: var(--text-color);
 }
 </style>

@@ -18,7 +18,7 @@ export default {
         'Attend a Liverpool FC match',
         'Contribute to an open-source project I have used',
         'Be capable of the left, right, and middle splits',
-        'Contribute to a research paper',
+        'Co-author a published research paper',
       ]
     }
   }
