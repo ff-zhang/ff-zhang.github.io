@@ -39,10 +39,10 @@
 </template>
 
 <script>
-import { store } from './../store.js'
+import { store } from '../store.js'
 
 export default {
-  name: 'Navbar',
+  name: 'NavBar',
   methods: {
     toggleOverlay() {
       this.showOverlay = !this.showOverlay

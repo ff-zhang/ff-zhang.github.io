@@ -1,14 +1,14 @@
 <template>
-  <Terminal :lines="lines"/>
+  <TerminalBlock :lines="lines"/>
 </template>
 
 <script>
-import Terminal from './Terminal.vue'
+import TerminalBlock from './Terminal.vue'
 
 export default {
-  name: 'Projects',
+  name: 'ProjectsView',
   components: {
-    Terminal
+    TerminalBlock
   },
   data() {
     return {

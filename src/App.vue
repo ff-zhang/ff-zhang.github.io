@@ -2,7 +2,7 @@
   <div id="app">
     <b-row class="m-0" no-gutters>
       <b-col class="p-0" cols="auto">
-        <Navbar/>
+        <NavBar/>
       </b-col>
       <b-col class="p-0">
         <router-view></router-view>
@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
+import NavBar from './components/NavBar.vue'
 
 export default {
   name: 'App',
   components: {
-    Navbar,
+    NavBar,
   }
 }
 </script>

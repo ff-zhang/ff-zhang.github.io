@@ -23,7 +23,7 @@ import CodeLine from './CodeLine.vue'
 import { store } from './../store.js'
 
 export default {
-  name: 'Terminal',
+  name: 'TerminalBlock',
   components: {
     CodeLine,
   },
