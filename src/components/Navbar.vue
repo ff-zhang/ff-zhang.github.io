@@ -21,7 +21,6 @@
                 :options="colourSchemes"
               ></b-form-select>
             </b-form-group>
-
             <b-form-group label="Typing Speed:" label-for="set-typing-speed">
               <b-form-radio-group
                 id="set-typing-speed"
