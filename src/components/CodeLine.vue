@@ -31,13 +31,13 @@ export default {
     typingSpeed() {
       switch(this.selectedTypingSpeed) {
         case 'Slow':
-          return 100
-
-        case 'Normal':
           return 50
 
+        case 'Normal':
+          return 10
+
         case 'Fast':
-          return 1
+          return 0.1
 
         default:
           return 50

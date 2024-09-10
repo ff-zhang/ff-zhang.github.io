@@ -62,7 +62,7 @@ export default {
       showOverlay: false, 
       links: [
         { target: '/education', icon: 'journal-bookmark-fill' },
-        { target: '/projects', icon: 'hammer' },
+        // { target: '/projects', icon: 'hammer' },
         { target: '/goals', icon: 'card-checklist' },
       ],
       colourSchemes: [
