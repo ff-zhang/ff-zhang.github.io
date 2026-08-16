@@ -17,7 +17,7 @@ export default {
         'Live in Europe for at least two months',
         '<s>Contribute to an open-source project I have used</s> (May 2024)',
         'Be capable of the left, right, and middle splits',
-        '<s>Co-author a published research paper<s>',
+        '<s>Co-author a published research paper<s> (May 2026)',
       ]
     }
   }
