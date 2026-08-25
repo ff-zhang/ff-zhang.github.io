@@ -1,0 +1,62 @@
+/*
+ * Theme palettes. `darker` is the default; the other four are the Material
+ * Theme palettes carried over from the previous version of this site, so the
+ * `theme` command has real choices behind it.
+ *
+ * Every palette defines the same token set. Themes are selected by a
+ * `data-theme` attribute on <html>, written by src/scripts/terminal.ts and
+ * restored from localStorage before first paint.
+ */
+
+:root,
+:root[data-theme='darker'] {
+  --bg: #212121;
+  --bg-raised: #1a1a1a;
+  --fg: #eeffff;
+  --muted: #6a6a6a;
+  --rule: #424242;
+  --prompt: #c3e88d;
+  --accent: #c3e88d;
+  --link: #89ddff;
+  --highlight: #f07178;
+  --selection: #3a3f58;
+}
+
+:root[data-theme='palenight'] {
+  --bg: #292d3e;
+  --bg-raised: #1b1e2b;
+  --fg: #a6accd;
+  --muted: #676e95;
+  --rule: #3a3f58;
+  --prompt: #c3e88d;
+  --accent: #c3e88d;
+  --link: #89ddff;
+  --highlight: #f07178;
+  --selection: #444267;
+}
+
+:root[data-theme='ocean'] {
+  --bg: #0f111a;
+  --bg-raised: #090b10;
+  --fg: #8f93a2;
+  --muted: #464b5d;
+  --rule: #3b3f51;
+  --prompt: #c3e88d;
+  --accent: #c3e88d;
+  --link: #89ddff;
+  --highlight: #f07178;
+  --selection: #1f2233;
+}
+
+:root[data-theme='lighter'] {
+  --bg: #ffffff;
+  --bg-raised: #fafafa;
+  --fg: #546e7a;
+  --muted: #90a4ae;
+  --rule: #cfd8dc;
+  --prompt: #91b859;
+  --accent: #39adb5;
+  --link: #6182b8;
+  --highlight: #e53935;
+  --selection: #cceae7;
+}

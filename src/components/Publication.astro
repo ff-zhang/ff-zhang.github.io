@@ -1,0 +1,56 @@
+---
+import { paperLinks, type Paper } from '../lib/bibtex';
+import { isSiteAuthor } from '../lib/site';
+
+interface Props {
+  paper: Paper;
+  index: number;
+}
+
+const { paper, index } = Astro.props;
+const links = paperLinks(paper);
+const external = (href: string) => /^https?:\/\//.test(href);
+---
+
+<article class="pub">
+  <span class="pub__index" aria-hidden="true">[{index}]</span>
+  <div>
+    <h4 class="pub__title">
+      {paper.title}
+      {paper.award && <span class="pub__award">{paper.award}</span>}
+    </h4>
+    <p class="pub__authors">
+      {
+        paper.authors.map((author, i) => (
+          <>
+            {i > 0 && ', '}
+            {isSiteAuthor(author) ? (
+              <span class="pub__me">{author}</span>
+            ) : (
+              author
+            )}
+          </>
+        ))
+      }
+    </p>
+    <p class="pub__venue">
+      {paper.venue}, {paper.year}{paper.pages && <>, pp. {paper.pages}</>}
+    </p>
+    {
+      links.length > 0 && (
+        <p class="pub__links">
+          {links.map((link) => (
+            <a
+              class="pub__link"
+              href={link.href}
+              target={external(link.href) ? '_blank' : undefined}
+              rel={external(link.href) ? 'noopener noreferrer' : undefined}
+            >
+              {link.label}
+            </a>
+          ))}
+        </p>
+      )
+    }
+  </div>
+</article>

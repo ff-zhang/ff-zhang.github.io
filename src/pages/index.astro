@@ -1,0 +1,275 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Publication from '../components/Publication.astro';
+import { byYear, type Paper } from '../lib/bibtex';
+import { SITE } from '../lib/site';
+
+const papers = (await getCollection('papers')).map((entry) => entry.data as Paper);
+const published = byYear(papers.filter((p) => p.published));
+const preprints = byYear(papers.filter((p) => !p.published));
+
+const news = (await getCollection('news')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const education = (await getCollection('education')).sort((a, b) => a.data.order - b.data.order);
+
+const allProjects = await getCollection('projects');
+const projects = allProjects
+  .filter((p) => p.data.group === 'project')
+  .sort((a, b) => a.data.order - b.data.order);
+const experience = allProjects
+  .filter((p) => p.data.group === 'experience')
+  .sort((a, b) => a.data.order - b.data.order);
+
+const newsDate = new Intl.DateTimeFormat('en-CA', {
+  year: 'numeric',
+  month: 'short',
+  timeZone: 'UTC',
+});
+
+// Running counter so publication indices read [1], [2], ... down the page.
+let pubIndex = 0;
+---
+
+<Base>
+  <div class="boot">
+    <p class="boot__line">{SITE.host}:~$ ./welcome.sh</p>
+    <p class="boot__line">
+      <span class="boot__ok">ok</span> loaded profile for {SITE.name}
+    </p>
+  </div>
+
+  <Section id="about" command="whoami">
+    <p>
+      Hi, my name is Felix Zhang. I'm an M.Sc. student in Computer Science at the
+      <a href={SITE.affiliationUrl} target="_blank" rel="noopener noreferrer"
+        >University of Toronto</a
+      >, supervised by Professor
+      <a href={SITE.advisorUrl} target="_blank" rel="noopener noreferrer">
+        {SITE.advisor}
+      </a> in the
+      <a href={SITE.labUrl} target="_blank" rel="noopener noreferrer">{SITE.lab}</a>.
+    </p>
+    <p>
+      Outside of research I play
+      <a href="https://magic.wizards.com/en" target="_blank" rel="noopener noreferrer">
+        Magic: the Gathering
+      </a> and go rock climbing.
+    </p>
+  </Section>
+
+  <Section id="research" command="cat research.md">
+    <p>
+      I'm interested in computer systems, and am particularly fascinated by
+      problems in <span class="punc">data centre networking</span>,
+      <span class="punc">operating systems</span>,
+      <span class="punc">data management</span>, and
+      <span class="punc">distributed systems</span>.
+    </p>
+    <p>
+      My current work is on memory disaggregation &mdash; most recently
+      <a
+        href="https://www.usenix.org/conference/nsdi26/presentation/sankhe"
+        target="_blank"
+        rel="noopener noreferrer">PD3</a
+      >, which uses DPUs to prefetch data from disaggregated memory and close
+      the gap between memory-disaggregated applications and their monolithic
+      counterparts.
+    </p>
+    <p>Previously, I have worked with and at:</p>
+    <ul class="plain-list">
+      <li>
+        &mdash; <a href="https://cerebras.ai/" target="_blank" rel="noopener noreferrer">
+          Cerebras Systems
+        </a> as a runtime ML engineer
+      </li>
+      <li>
+        &mdash; <a
+          href="https://www.cs.toronto.edu/~sunk/index.html"
+          target="_blank"
+          rel="noopener noreferrer">Prof. Jack Sun</a
+        > on a Rust-based pedagogical kernel,
+        <a href="https://github.com/KidneyOS/KidneyOS" target="_blank" rel="noopener noreferrer">
+          KidneyOS
+        </a>
+      </li>
+      <li>
+        &mdash; <a
+          href="https://bme.utoronto.ca/faculty-research/core-faculty/tom-chau/"
+          target="_blank"
+          rel="noopener noreferrer">Prof. Tom Chau</a
+        > and <a
+          href="https://www.linkedin.com/in/erica-floreani"
+          target="_blank"
+          rel="noopener noreferrer">Erica Floreani</a
+        > on denoising EEG data with deep learning
+      </li>
+      <li>
+        &mdash; Prof. Anton Zilman on predicting T-cell cytokine outputs using
+        machine learning
+      </li>
+      <li>
+        &mdash; <a
+          href="http://www.davidrokeby.com/home.html"
+          target="_blank"
+          rel="noopener noreferrer">Prof. David Rokeby</a
+        > on imitating human movements in real-time simulations using
+        reinforcement learning
+      </li>
+      <li>
+        &mdash; <a
+          href="https://www.linkedin.com/in/csealfon/?originalSubdomain=ca"
+          target="_blank"
+          rel="noopener noreferrer">Prof. Carolyn Sealfon</a
+        > on using suggestion extraction models on student feedback
+      </li>
+    </ul>
+  </Section>
+
+  <Section id="publications" command="cat publications.bib">
+    {
+      papers.length === 0 && (
+        <p class="pubs__empty">
+          No publications yet &mdash; watch this space. In the meantime, see
+          <a href={SITE.cv}>my CV</a> for work in progress.
+        </p>
+      )
+    }
+    {
+      published.length > 0 && (
+        <div class="pubs__group">
+          {published.map(([year, group]) => (
+            <>
+              <h3 class="pubs__group-heading">{year}</h3>
+              {group.map((paper) => (
+                <Publication paper={paper} index={++pubIndex} />
+              ))}
+            </>
+          ))}
+        </div>
+      )
+    }
+    {
+      preprints.length > 0 && (
+        <div class="pubs__group">
+          <h3 class="pubs__group-heading">preprints &amp; workshop papers</h3>
+          {preprints.map(([, group]) =>
+            group.map((paper) => <Publication paper={paper} index={++pubIndex} />),
+          )}
+        </div>
+      )
+    }
+  </Section>
+
+  <Section id="news" command="tail -f news.log">
+    <ul class="plain-list">
+      {
+        news.map((item) => (
+          <li class="news__item">
+            <span class="news__date">{newsDate.format(item.data.date)}</span>
+            <span set:html={item.data.text} />
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section id="education" command="cd education && ls -l">
+    {
+      education.map((entry) => (
+        <div class="edu">
+          <h3 class="edu__degree">{entry.data.degree}</h3>
+          <p class="edu__meta">
+            {entry.data.institution}
+            {entry.data.detail && <> &middot; {entry.data.detail}</>} &middot;{' '}
+            {entry.data.dates}
+          </p>
+          {entry.data.awards.length > 0 && (
+            <ul class="edu__awards">
+              {entry.data.awards.map((award) => (
+                <li class="edu__award">
+                  {award.declined && <span class="edu__declined">[declined] </span>}
+                  {award.name}
+                  {award.amount && <> ({award.amount})</>}
+                  {award.dates && <span class="muted"> &middot; {award.dates}</span>}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))
+    }
+  </Section>
+
+  <Section id="projects" command="ls projects/">
+    {
+      projects.map((entry) => (
+        <div class="proj">
+          <h3 class="proj__name">
+            {entry.data.href ? (
+              <a href={entry.data.href} target="_blank" rel="noopener noreferrer">
+                {entry.data.name}
+              </a>
+            ) : (
+              entry.data.name
+            )}
+          </h3>
+          {entry.data.description && <p class="proj__desc">{entry.data.description}</p>}
+        </div>
+      ))
+    }
+
+    <h3 class="pubs__group-heading" style="margin-top:2rem">work &amp; volunteer experience</h3>
+    {
+      experience.map((entry) => (
+        <div class="proj">
+          <h4 class="proj__name">{entry.data.name}</h4>
+          <p class="proj__org">
+            {entry.data.href ? (
+              <a href={entry.data.href} target="_blank" rel="noopener noreferrer">
+                {entry.data.org}
+              </a>
+            ) : (
+              entry.data.org
+            )}
+          </p>
+          {entry.data.description && <p class="proj__desc">{entry.data.description}</p>}
+        </div>
+      ))
+    }
+  </Section>
+
+  <Section id="contact" command="cat contact.txt">
+    <ul class="plain-list">
+      <li>email &nbsp;&nbsp;&nbsp;<a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+      <li>
+        github &nbsp;&nbsp;<a href={SITE.github} target="_blank" rel="noopener noreferrer">
+          ff-zhang
+        </a>
+      </li>
+      <li>
+        linkedin <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer">
+          felixfzhang
+        </a>
+      </li>
+      <li>
+        scholar&nbsp; <a href={SITE.scholar} target="_blank" rel="noopener noreferrer">
+          Google Scholar
+        </a>
+      </li>
+      <li>cv &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href={SITE.cv}>cv.pdf</a></li>
+    </ul>
+  </Section>
+
+  <footer class="footer">
+    <p>
+      Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>.
+      Source on <a href={SITE.github + '/ff-zhang.github.io'} target="_blank" rel="noopener noreferrer">
+        GitHub
+      </a>.
+    </p>
+  </footer>
+</Base>

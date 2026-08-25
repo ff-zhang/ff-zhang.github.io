@@ -1,0 +1,23 @@
+---
+import { SITE } from '../lib/site';
+---
+
+{/* Markup only — revealed and wired up by src/scripts/terminal.ts. Every
+    command here has a plain link or heading equivalent elsewhere on the page,
+    so nothing is reachable only by typing. */}
+<div class="cmdbar">
+  <div class="cmdbar__output" id="cmd-output" role="log" aria-live="polite"></div>
+  <form class="cmdbar__form" id="cmd-form" autocomplete="off">
+    <label class="cmdbar__prompt" for="cmd-input">{SITE.host}:~$</label>
+    <input
+      class="cmdbar__input"
+      id="cmd-input"
+      name="command"
+      type="text"
+      placeholder="type `help`"
+      aria-label="Terminal command"
+      autocomplete="off"
+      spellcheck="false"
+    />
+  </form>
+</div>

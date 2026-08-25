@@ -1,0 +1,33 @@
+# Reverse-chronological updates. `text` may contain inline HTML links.
+# Newest entries render first — sorting is by date, not file order.
+
+- id: nsdi26
+  date: 2026-05-01
+  text: >-
+    <a href="https://www.usenix.org/conference/nsdi26/presentation/sankhe">PD3</a>,
+    on prefetching data with DPUs for disaggregated memory, appears at
+    <strong>NSDI&nbsp;'26</strong>.
+
+- id: msc-start
+  date: 2025-09-01
+  text: >-
+    Started my M.Sc. in Computer Science at the
+    <a href="https://www.utoronto.ca/">University of Toronto</a>,
+    supervised by Professor Qizhen Zhang.
+
+- id: ogs-2025
+  date: 2025-05-01
+  text: >-
+    Awarded the Ontario Graduate Scholarship for 2025&ndash;2026.
+
+- id: hbsc-complete
+  date: 2025-06-01
+  text: >-
+    Completed my H.B.Sc. in Computer Science with a major in Mathematics,
+    graduating as a Dean's List Scholar.
+
+- id: fields-2024
+  date: 2024-06-01
+  text: >-
+    Joined the <a href="https://www.fields.utoronto.ca/">Fields Institute</a>
+    Undergraduate Summer Research Program.

@@ -1,0 +1,39 @@
+- id: msc
+  order: 1
+  institution: University of Toronto
+  degree: M.Sc. in Computer Science
+  detail: 4.0 cGPA
+  dates: Sept. 2025 - Present
+  awards:
+    - name: Ontario Graduate Scholarship
+      amount: $15,000
+      dates: May 2025 - April 2026
+    - name: Queen Elizabeth II Graduate Scholarships in Science and Technology
+      amount: $15,000
+      dates: May 2025 - April 2026
+      declined: true
+
+- id: hbsc
+  order: 2
+  institution: University of Toronto
+  degree: H.B.Sc. in Computer Science, Major in Mathematics
+  detail: 3.96 cGPA
+  dates: Sept. 2021 - June 2025
+  awards:
+    - name: Fields Undergraduate Summer Research Program
+      amount: $3,800
+      dates: June 2024 - Aug. 2024
+    - name: Louis Savlov Scholarships in Sciences and Humanities
+      amount: $500
+      dates: Nov. 2023 - Jan. 2025
+    - name: Dean's List Scholar
+      dates: Sept. 2021 - June 2025
+    - name: Second Malcolm Wallace Scholarship
+      amount: $7,500
+      dates: Sept. 2021 - Oct. 2024
+    - name: B.C. Achievement Scholarship
+      amount: $7,500
+      dates: Aug. 2021
+    - name: District/Authority Scholarship
+      amount: $7,500
+      dates: Aug. 2021

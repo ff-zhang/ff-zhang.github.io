@@ -1,0 +1,436 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  scroll-behavior: smooth;
+  /*
+   * Anchor targets must clear the sticky nav, whose height changes as the
+   * links wrap (one row wide, three rows at 375px). terminal.ts measures it
+   * into --chrome-h; the fallback is the tallest case, since over-scrolling
+   * only adds harmless space while under-scrolling hides the heading.
+   */
+  scroll-padding-top: calc(var(--chrome-h, 5.5rem) + 1rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', 'Consolas',
+    'Liberation Mono', 'Menlo', monospace;
+  font-size: 14px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--selection);
+  color: var(--fg);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+a:hover,
+a:focus-visible {
+  border-bottom-color: currentColor;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------- chrome */
+
+.chrome {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg-raised);
+  border-bottom: 1px solid var(--rule);
+}
+
+.chrome__spacer {
+  flex: 1;
+}
+
+.chrome__theme {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.chrome__theme-label {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.chrome__select {
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  font: inherit;
+  font-size: 12px;
+  padding: 0.1rem 0.3rem;
+  cursor: pointer;
+}
+
+.chrome__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1.25rem;
+  padding: 0.4rem 1rem;
+  font-size: 13px;
+}
+
+.chrome__nav a {
+  color: var(--muted);
+  border-bottom: 1px solid transparent;
+}
+
+.chrome__nav a:hover,
+.chrome__nav a:focus-visible {
+  color: var(--fg);
+  border-bottom-color: var(--accent);
+}
+
+/* ----------------------------------------------------------------- page */
+
+.page {
+  max-width: 78ch;
+  margin: 0 auto;
+  padding: 2rem 1rem 6rem;
+}
+
+.boot {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0 0 2.5rem;
+}
+
+.boot__line {
+  margin: 0;
+}
+
+.boot__ok {
+  color: var(--accent);
+}
+
+/* -------------------------------------------------------------- section */
+
+/* Offset comes from html's scroll-padding-top; setting it here too would
+   double the gap. */
+.section {
+  margin: 0 0 3.5rem;
+}
+
+.section__heading {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0 0 1rem;
+  color: var(--fg);
+}
+
+.section__heading::before {
+  content: '$ ';
+  color: var(--prompt);
+  font-weight: 700;
+}
+
+.section__body > :first-child {
+  margin-top: 0;
+}
+
+.section__body > :last-child {
+  margin-bottom: 0;
+}
+
+.section__body p {
+  margin: 0 0 1rem;
+}
+
+/* ----------------------------------------------------------------- lists */
+
+.plain-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.punc {
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------------ news */
+
+.news__item {
+  display: grid;
+  grid-template-columns: 9ch 1fr;
+  gap: 0 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.news__date {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------- publications */
+
+.pubs__empty {
+  color: var(--muted);
+}
+
+.pubs__group {
+  margin: 0 0 2rem;
+}
+
+.pubs__group-heading {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--rule);
+  text-transform: lowercase;
+}
+
+.pub {
+  display: grid;
+  grid-template-columns: 4ch 1fr;
+  gap: 0 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.pub__index {
+  color: var(--muted);
+}
+
+.pub__title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.pub__authors,
+.pub__venue {
+  margin: 0;
+  color: var(--muted);
+}
+
+.pub__me {
+  color: var(--fg);
+  font-weight: 700;
+}
+
+.pub__award {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0 0.4rem;
+  font-size: 12px;
+  color: var(--highlight);
+  border: 1px solid currentColor;
+  border-radius: 2px;
+}
+
+.pub__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.15rem;
+}
+
+.pub__link {
+  color: var(--link);
+}
+
+.pub__link::before {
+  content: '[';
+  color: var(--muted);
+}
+
+.pub__link::after {
+  content: ']';
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------- education */
+
+.edu {
+  margin-bottom: 1.75rem;
+}
+
+.edu__degree {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.edu__meta {
+  margin: 0;
+  color: var(--muted);
+}
+
+.edu__awards {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+}
+
+.edu__award::before {
+  content: '- ';
+  color: var(--muted);
+}
+
+.edu__declined {
+  color: var(--highlight);
+}
+
+/* -------------------------------------------------------------- projects */
+
+.proj {
+  margin-bottom: 1.1rem;
+}
+
+.proj__name {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.proj__org,
+.proj__desc {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------ commandbar */
+
+/* The command bar is a shortcut, never the only route to content, so it is
+   only revealed once the enhancing script confirms it is wired up. */
+.cmdbar {
+  display: none;
+}
+
+.js-ready .cmdbar {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: block;
+  background: var(--bg-raised);
+  border-top: 1px solid var(--rule);
+}
+
+.cmdbar__output {
+  max-height: 9rem;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0 1rem;
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.cmdbar__output:not(:empty) {
+  padding: 0.5rem 1rem;
+}
+
+.cmdbar__error {
+  color: var(--highlight);
+}
+
+.cmdbar__form {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+}
+
+.cmdbar__prompt {
+  color: var(--prompt);
+  white-space: nowrap;
+}
+
+.cmdbar__input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  color: var(--fg);
+  font: inherit;
+  padding: 0;
+}
+
+.cmdbar__input:focus {
+  outline: none;
+}
+
+.cmdbar__input::placeholder {
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------------- footer */
+
+.footer {
+  margin-top: 4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ------------------------------------------------------------------- a11y */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------- narrow */
+
+@media (max-width: 34rem) {
+  .news__item,
+  .pub {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .pub__index {
+    display: none;
+  }
+
+  /* Typing commands on a phone keyboard is not the point; reclaim the space. */
+  .js-ready .cmdbar {
+    display: none;
+  }
+}

@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/site';
+---
+
+<Base title="404 — Not Found" description="That page does not exist.">
+  <div class="boot">
+    <p class="boot__line">{SITE.host}:~$ cat {Astro.url.pathname}</p>
+    <p class="boot__line cmdbar__error">cat: {Astro.url.pathname}: No such file or directory</p>
+  </div>
+  <p><a href="/">&larr; back to ~</a></p>
+</Base>

@@ -1,0 +1,19 @@
+---
+import { SITE, SECTIONS } from '../lib/site';
+
+const THEMES = ['darker', 'palenight', 'ocean', 'lighter'];
+---
+
+<header class="chrome">
+  <nav class="chrome__nav" aria-label="Sections">
+    {SECTIONS.map((section) => <a href={`#${section.id}`}>{section.nav}</a>)}
+    <a href={SITE.cv}>~/cv.pdf</a>
+    <span class="chrome__spacer"></span>
+    <div class="chrome__theme">
+      <label class="chrome__theme-label" for="theme-select">theme</label>
+      <select class="chrome__select" id="theme-select">
+        {THEMES.map((theme) => <option value={theme}>{theme}</option>)}
+      </select>
+    </div>
+  </nav>
+</header>

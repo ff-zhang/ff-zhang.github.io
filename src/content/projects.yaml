@@ -1,0 +1,40 @@
+# Projects and work/volunteer experience.
+# `group` selects the heading an entry files under: project | experience
+
+- id: kidneyos
+  order: 1
+  group: project
+  name: KidneyOS
+  href: https://github.com/KidneyOS/KidneyOS
+  description: >-
+    A Rust-based pedagogical operating system kernel, built with
+    Prof. Jack Sun for use in undergraduate OS courses.
+
+- id: resume-website
+  order: 2
+  group: project
+  name: Personal website
+  href: https://github.com/ff-zhang/ff-zhang.github.io
+  description: >-
+    This site — a static terminal, built with Astro.
+
+- id: cerebras
+  order: 1
+  group: experience
+  name: Runtime ML Engineer
+  org: Cerebras Systems
+  href: https://cerebras.ai/
+  description: >-
+    Worked on the runtime powering Cerebras' wafer-scale accelerators.
+
+- id: waopa
+  order: 2
+  group: experience
+  name: Video Producer
+  org: Westcoast Academy of Performing Arts
+
+- id: blc
+  order: 3
+  group: experience
+  name: Website
+  org: Business Leadership Club @ St. Michaels University School
