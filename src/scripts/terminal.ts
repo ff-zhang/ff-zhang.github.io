@@ -202,37 +202,13 @@ function run(raw: string): void {
 
 /* ------------------------------------------------------------------ input */
 
-const history_: string[] = [];
-let historyIndex = -1;
-
 if (form && input) {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     const value = input.value.trim();
     input.value = '';
     if (!value) return;
-    history_.push(value);
-    historyIndex = history_.length;
     echo(value);
     run(value);
-  });
-
-  input.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowUp') {
-      if (historyIndex > 0) {
-        historyIndex -= 1;
-        input.value = history_[historyIndex] ?? '';
-        event.preventDefault();
-      }
-    } else if (event.key === 'ArrowDown') {
-      if (historyIndex < history_.length - 1) {
-        historyIndex += 1;
-        input.value = history_[historyIndex] ?? '';
-      } else {
-        historyIndex = history_.length;
-        input.value = '';
-      }
-      event.preventDefault();
-    }
   });
 }

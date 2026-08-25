@@ -114,9 +114,9 @@ a:focus-visible {
 
 /* ----------------------------------------------------------------- page */
 
+/* Full-bleed: content runs the width of the viewport, with the same 1rem
+   gutter as the nav so the two line up. */
 .page {
-  max-width: 78ch;
-  margin: 0 auto;
   padding: 2rem 1rem 6rem;
 }
 
